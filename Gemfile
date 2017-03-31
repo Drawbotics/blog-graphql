@@ -10,6 +10,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 
 gem 'pundit', '~> 1.1'
+gem 'devise', '~> 4.2', '>= 4.2.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

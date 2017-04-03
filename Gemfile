@@ -22,6 +22,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'graphiql-rails'
+
+  # For the sake of graphiql
+  gem 'sass-rails'
+  gem 'uglifier'
+  gem 'coffee-rails'
+
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

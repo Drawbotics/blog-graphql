@@ -1,24 +1,7 @@
-# README
+To make a request through the UI at `/graphiql`, you have to setup a cookie named `_graphql_token` with as value the user's `token` which you want to impersonate.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You can do it like this in the chrome debug console:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+````
+document.cookie="_graphql_token=your_token_here"
+````

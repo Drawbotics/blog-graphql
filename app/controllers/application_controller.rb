@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   # Add a before_action to authenticate all requests.
   # Move this to subclassed controllers if you only
   # want to authenticate certain methods.
-  before_action :authenticate
+  # before_action :authenticate
 
   protected
 
@@ -16,7 +16,9 @@ class ApplicationController < ActionController::API
 
   def authenticate_token
     authenticate_with_http_token do |token, options|
-      @current_user = User.find_by(api_key: token)
+      @current_user = User.find_by(token: token)
+      sign_in @current_user, store: false
+      return @current_user
     end
   end
 

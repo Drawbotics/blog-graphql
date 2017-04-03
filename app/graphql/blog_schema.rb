@@ -1,5 +1,6 @@
 BlogSchema = GraphQL::Schema.define do
   query(Types::QueryType)
+  mutation(Mutations::Root)
 
   # Relay Object Identification:
 
@@ -28,6 +29,7 @@ BlogSchema = GraphQL::Schema.define do
     raise(NotImplementedError)
   }
 
+  
   # GraphQL::Batch setup:
   lazy_resolve(Promise, :sync)
   instrument(:query, GraphQL::Batch::Setup)

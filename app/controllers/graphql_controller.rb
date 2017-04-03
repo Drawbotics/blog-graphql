@@ -4,9 +4,9 @@ class GraphqlController < ApplicationController
     query = params[:query]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: @current_user,
     }
-    result = BlogGraphqlSchema.execute(query, variables: variables, context: context)
+    result = BlogSchema.execute(query, variables: variables, context: context)
     render json: result
   end
 

@@ -10,4 +10,6 @@ Types::QueryType = GraphQL::ObjectType.define do
       "Hello World!"
     }
   end
+
+  field :node, GraphQL::Relay::Node.field
 end

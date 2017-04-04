@@ -43,3 +43,39 @@ That answers exactly what we expect from the request, which is why graphql is pe
   }
 }
 ````
+
+# Queries
+
+## List the 5 last posts
+The `(limit: 5)` is actually optional and it will fallback to 30, which is what we set in the query definition.
+````graphql
+{
+  posts(limit: 5) {
+    content
+    title
+    comments {
+      content
+    }
+    user {
+      email
+    }
+  }
+}
+````
+
+## Get the post with its ID
+````graphql
+{
+  post(id: 3) {
+    title
+    content
+    comments {
+      content
+    }
+    user {
+      email
+    }
+  }
+}
+````
+

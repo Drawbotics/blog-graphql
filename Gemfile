@@ -22,6 +22,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'graphiql-rails'
+  gem 'faker', '~> 1.7', '>= 1.7.3'
 
   # For the sake of graphiql
   gem 'sass-rails'

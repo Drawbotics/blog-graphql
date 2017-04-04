@@ -9,6 +9,8 @@ Types::PostType = GraphQL::ObjectType.define do
   field :title,   !types.String
   field :content, !types.String
 
+  # connection :comments, types[::Types::CommentType].connection_type
+
   field :comments, types[::Types::CommentType] do
     argument :limit, types.Int
     resolve ->(object, args, ctx) {
@@ -17,4 +19,17 @@ Types::PostType = GraphQL::ObjectType.define do
       comments
     }
    end
+
+  field :categories, types[::Types::CategoryType] do
+    resolve ->(object, args, ctx) {
+      categories = object.categories
+    }
+   end
+
+  field :categories, types[::Types::CategoryType] do
+    resolve ->(object, args, ctx) {
+      object.categories
+    }
+  end
+
 end

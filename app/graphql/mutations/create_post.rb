@@ -1,9 +1,10 @@
 Mutations::CreatePost = GraphQL::Relay::Mutation.define do
   
   name "createPost"
-  input_field :title,      !types.String
-  input_field :content,    !types.String
-  # input_field :user_id,    !types.ID
+  input_field :title,           !types.String
+  input_field :content,         !types.String
+  # input_field :categories,      [::Types::Category]
+  # input_field :category_ids,    [types.Int]
 
   # return_field :user,    !types.User
   return_field :post,     ::Types::PostType

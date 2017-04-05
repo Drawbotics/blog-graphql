@@ -1,23 +1,34 @@
 Mutations::CreatePost = GraphQL::Relay::Mutation.define do
   
   name "createPost"
+
   input_field :title,           !types.String
   input_field :content,         !types.String
-  # input_field :categories,      [::Types::Category]
   input_field :category_ids,    types[types.ID]
+  input_field :comments,        types[::Types::Inputs::CommentInputType]
 
-  # return_field :user,    !types.User
   return_field :post,     ::Types::PostType
   return_field :errors,   types[types.String]
   return_field :success,  types.Boolean
 
   resolve -> (object, args, ctx) {
-    post = Post.create(
-      title:        args[:title],
-      content:      args[:content],
-      category_ids: args[:category_ids],
-      user:         ctx[:current_user],
-    )
+    user = ctx[:current_user]
+
+    comments_attributes = []
+    args[:comments].each do |comment| 
+      comments_attributes << { user: user, content: comment[:content] }
+    end
+
+    post_attributes = {
+      title:                args[:title],
+      content:              args[:content],
+      category_ids:         args[:category_ids],
+      comments_attributes:  comments_attributes,
+      user:                 user,
+    }
+    post = Post.create(post_attributes)
+
+    # post.comments << Comment.create(user: user, content: )
     {
       post:   post.valid? ? post : nil,
       errors: post.errors.full_messages,

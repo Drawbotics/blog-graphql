@@ -14,10 +14,16 @@ document.cookie="_graphql_token=your_token_here"
 
 ````graphql
 mutation createPost {
-  createPost(input: {title: "This is my title", content: "Some content", category_ids: [1,2] }) {
+  createPost(input: {title: "This is a title", content: "Some content", category_ids: [1,2], comments: [{content: "this is the first comment"}, {content: "this is the second comment"}] }) {
     post {
       title
       content
+      comments {
+        content
+        user {
+          email
+        }
+      }
 			categories {
 				name
 			}
@@ -36,8 +42,22 @@ That answers exactly what we expect from the request, which is why graphql is pe
   "data": {
     "createPost": {
       "post": {
-        "title": "This is my title",
+        "title": "This is a title",
         "content": "Some content",
+        "comments": [
+          {
+            "content": "this is the second comment",
+            "user": {
+              "email": "guido_schumm@braun.org"
+            }
+          },
+          {
+            "content": "this is the first comment",
+            "user": {
+              "email": "guido_schumm@braun.org"
+            }
+          }
+        ],
         "categories": [
           {
             "name": "Gorgeous Rubber Car"
@@ -47,7 +67,7 @@ That answers exactly what we expect from the request, which is why graphql is pe
           }
         ],
         "user": {
-          "email": "user@mail.org"
+          "email": "guido_schumm@braun.org"
         }
       }
     }

@@ -4,7 +4,7 @@ Mutations::CreatePost = GraphQL::Relay::Mutation.define do
   input_field :title,           !types.String
   input_field :content,         !types.String
   # input_field :categories,      [::Types::Category]
-  # input_field :category_ids,    [types.Int]
+  input_field :category_ids,    types[types.ID]
 
   # return_field :user,    !types.User
   return_field :post,     ::Types::PostType
@@ -13,9 +13,10 @@ Mutations::CreatePost = GraphQL::Relay::Mutation.define do
 
   resolve -> (object, args, ctx) {
     post = Post.create(
-      title:    args[:title],
-      content:  args[:content],
-      user:     ctx[:current_user]
+      title:        args[:title],
+      content:      args[:content],
+      category_ids: args[:category_ids],
+      user:         ctx[:current_user],
     )
     {
       post:   post.valid? ? post : nil,

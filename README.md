@@ -24,9 +24,9 @@ mutation createPost {
           email
         }
       }
-			categories {
-				name
-			}
+      categories {
+        name
+      }
       user {
         email
       }
